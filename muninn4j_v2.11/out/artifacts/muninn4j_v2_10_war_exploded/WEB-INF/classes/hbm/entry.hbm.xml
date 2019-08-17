@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazhangjing.muninn.v2.entry">
+
+    <class name="Volume" table="VOLUMES" discriminator-value="VOLUME">
+
+        <id name="id" type="string" column="ID" />
+        <discriminator column="TYPE"/>
+
+
+        <property name="title" column="TITLE" type="string" />
+        <property name="intro" type="string">
+            <column name="INTRO" sql-type="MEDIUMTEXT"/>
+        </property>
+        <property name="link" column="LINK" type="string" />
+        <property name="category" column="CATEGORY" type="string" />
+        <set name="chapters" table="CHAPTERS" inverse="true" cascade="delete" order-by="orders asc">
+            <key column="VOL_ID"></key>
+            <one-to-many class="Chapter" />
+        </set>
+
+        <subclass name="Book" discriminator-value="BOOK">
+        </subclass>
+        <subclass name="Course" discriminator-value="COURSE">
+        </subclass>
+    </class>
+
+    <class name="Chapter" table="CHAPTERS">
+
+        <id name="id" type="string" column="CH_ID" />
+
+        <property name="title" type="string" column="TITLE" />
+        <property name="intro" type="string">
+            <column name="INTRO" sql-type="MEDIUMTEXT"/>
+        </property>
+        <property name="editCount" type="integer" column="EDIT_COUNT" />
+        <property name="noteCount" type="integer" column="NOTE_COUNT" />
+        <property name="lastEdit" type="date" column="LAST_EDIT" />
+        <property name="content" type="string">
+            <column name="CONTENT" sql-type="MEDIUMTEXT"/>
+        </property>
+        <property name="orders" type="int" column="ORDERS" />
+        <property name="fileName" type="string" column="FILENAME" />
+        <property name="version" type="string"
+                  formula="(select concat(NOTE_COUNT, '.', EDIT_COUNT) from CHAPTERS c where c.CH_ID = CH_ID)" />
+        <set name="postscripts" table="POSTSCRIPTS" cascade="delete" order-by="time asc">
+            <key column="CH_ID"></key>
+            <one-to-many class="PostScript" />
+        </set>
+        <many-to-one name="volume" class="Volume" column="VOL_ID" />
+    </class>
+
+    <class name="PostScript" table="POSTSCRIPTS">
+
+        <id name="id" column="POS_ID" type="string"/>
+        <discriminator column="POSTSCRIPT" />
+
+        <property name="title" type="string" column="TITLE" />
+        <property name="body" type="string">
+            <column name="BODY" sql-type="MEDIUMTEXT" />
+        </property>
+        <property name="time" type="date" column="TIME" />
+
+        <subclass name="Link" discriminator-value="LINK">
+            <property name="url" type="string" column="URL" />
+        </subclass>
+        <subclass name="Note" discriminator-value="NOTE">
+        </subclass>
+        <subclass name="Question" discriminator-value="QUESTION">
+        </subclass>
+        <subclass name="Quote" discriminator-value="QUOTE">
+            <property name="footer" type="string" column="FOOTER"/>
+        </subclass>
+    </class>
+
+</hibernate-mapping>

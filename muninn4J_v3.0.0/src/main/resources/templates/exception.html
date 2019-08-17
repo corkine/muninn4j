@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Error Page</title>
+</head>
+<body>
+<h1>服务器发生错误</h1>
+<h3>异常为：</h3>
+<p th:text="${exception}"></p>
+<h3>堆栈为：</h3>
+<p th:text="${stacktrace}"></p>
+</body>
+</html>

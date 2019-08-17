@@ -1,0 +1,265 @@
+transConfig:
+  fromPath: /root/.jupyter
+  toPath: /muninn-v2/muninn/source
+  transCommand: jupyter nbconvert
+  lazyFetchVolume: true
+  deletePostScriptBeforeUpdate: false
+#在服务器端需要修改此处设置
+#command to execute:
+# java -Djava.ext.dirs=C:xxx/lib com.mazhangjing.muninn.v2.check.DoUpdate
+# fromPath: /root/.jupyter
+# toPath: /muninn-v2/muninn/source
+
+#必须要有 fromFolder， fromPath
+#chapterFiles 可以没有，如果有，则必须提供包含至少两个参数的列表，第二个参数为html的地址
+#实际将合并此三者得到章节所需 ipynb 的地址，并且进行查找、迁移和转换
+#如果更改了 ID 则一定要更改文章，以保持文本更新，否则将会删除此文章，除非关闭了 lazyFetchVolume
+
+volumeOrder: ["mt","pr1","pandas","plot","sklearn","matlab","introc","cst","langc",
+              "javase","javaee","design_pattern","database","js","python","visual1","neuro","ml1"]
+
+volumeInfo:
+  probability:
+    category: Data Science
+    type: COURSE
+    title: Probability
+    intro: 课程简介为空。
+    link: http://coursea.com/tw
+    fromFolder: book_learn_stats
+    chapterFiles: {
+      pbw2: [概率导论, Week1_2_Probability.html,1 ],
+      pbw3: [独立概率和古典概率, Week_3.html, 2],
+      pbw4: [离散分布模型, Week4_PMF_CDF.html, 3],
+      pbw5: [连续分布模型, week5.html, 4],
+      pbw6: [连续分布期望值, week6.html, 5],
+    }
+
+  pandas:
+    category: Data Science
+    type: COURSE
+    title: Pandas & Numpy
+    fromFolder: book_learn_stats
+    chapterFiles: {}
+
+  matplotlib:
+    category: Data Science
+    title: Plot with Matplotlib
+    fromFolder: book_learn_stats
+    chapterFiles: {}
+
+  sklearn:
+    category: Data Science
+    title: SKlearn
+    fromFolder: book_learn_stats
+    chapterFiles: {}
+
+  matlab:
+    category: Data Science
+    title: MATLAB & PTB
+    fromFolder: book_learn_stats
+    chapterFiles: {}
+
+  model_thinking:
+    category: Model Thinking
+    title: Model Thinking
+    fromFolder: coursera_learn_models
+    chapterFiles: {
+      mtw1: ["[O] Aggragation(S) & Decision(P)", WEEK2_model_thinking.html, 1],
+      mtw2: ["[I] How People Think & Modeling Data", Week3_Model_Thinking.html, 2],
+      mtw3: ["[F] Tipping Point & Growth Model", week4_tipping_point.html, 3],
+      mtw4: ["[F] Perspectives & Marklv Processing", week5_problem_soving.html, 4],
+      mtw5: [Lyapunov Functions, week7_lyapunov_functions.html, 5],
+      mtw6: [path dependent, week8_path_dependent.html, 6],
+      mtw7: [random, week9_random_walk.html, 7],
+      mtw8: [dilemma, week10_prisoner_dilemma.html, 8],
+      mtw9: [replicator, week11_replicator_dynamics.html, 9],
+    }
+
+  lang_c:
+    category: Computer Science
+    title: Computer and Lang C
+    type: BOOK
+    fromFolder: learn_c
+    chapterFiles: {
+      lcw0: [可计算思想和计算机概论, learn_c_1.html, 1],
+      lcw1: [数据、字符串、格式化输入输出, chapter_4_string_and_scanf.html, 2],
+      lcw2: [操作符、表达式、语句、字符串I/O机制, chapter_5_operator.html, 3],
+      lcw3: [函数、指针和数组, chapter6_function.html, 4],
+      lcw4: [结构体和链表, chapter7_struct.html, 5],
+    }
+
+  computer_structure:
+    category: Computer Science
+    title: Computer Structure
+    type: BOOK
+    fromFolder: coursera_learn_computer
+    chapterFiles: {
+      csw1: [intro, chapter1_cs_intro.html, 1],
+      csw2: [x86_mips, chapter2_x86_mips.html, 2],
+      csw3: [ALU, chapter3_alu.html, 3],
+      csw4: [multi, chapter4_mult.html, 4],
+      csw5: [design_a_cpu, chapter5_design_a_cpu.html, 5],
+      csw6: [pipe_cpu, chapter6_pipe.html, 6],
+      csw7: [cache, chapter7_cache.html, 7],
+      csw8: [interrupt, chapter8_interrupt.html, 8],
+      csw9: [io, chapter9_io.html, 9],
+    }
+
+
+  design_pattern:
+    category: Computer Science
+    title: Design Pattern
+    type: BOOK
+    fromFolder: learn_design_pattern
+    chapterFiles: {
+      dpw1: ["策略模式，观察者模式和装饰器模式", chapter1_design_pattern_intro.html, 1],
+      dpw2: ["工厂模式",chapter2_factory.html, 2],
+      dpw3: ["单件模式和命令模式",chapter3_singleton_command.html, 3],
+      dpw4: ["适配器模式和外观模式",chapter4_adaptor_skin.html, 4],
+      dpw5: ["模板方法模式，迭代器和组合模式",chapter5_template_iterator.html, 5],
+      dpw6: ["状态模式和策略模式",chapter6_status.html, 6],
+      dpw7: ["代理模式",chapter7_proxy.html, 7],
+      dpw8: ["复合模式",chapter8_combination.html, 8],
+      dpw9: ["MVC模式",chapter9_mvc.html, 9],
+      dpw10: ["特定领域设计模式",chapter10_other_design_patterns.html, 10],
+    }
+
+  java_se:
+    category: Computer Science
+    title: Thinking in Java
+    type: BOOK
+    fromFolder: learn_java
+    chapterFiles: {
+      sew1: [对象、操作符和流程控制, chapter1_play_java.html, 1],
+      sew2: [初始化和清理, chapter2_init_finalize.html, 2],
+      sew3: [权限、类重用, chapter3_permission.html, 3],
+      sew4: [多态, chapter4_cast.html, 4],
+      sew5: [接口, chapter5_interface.html, 5],
+      sew6: [内部类, chapter6_innerclass.html, 6],
+      sew7: [容器, chapter7_container.html, 7],
+      sew8: [异常, chapter8_exception.html, 8],
+      sew9: [字符串, chapter9_string.html, 9],
+      sew10: [类型信息, chapter10_rtti.html, 10],
+      sew11: [泛型, chapter11_generics.html, 11],
+      sew12: [数组, chapter12_array.html, 12],
+      sew13: [IO, chapter13_io.html, 13],
+      sew14: [J8, chapter14_java8.html, 14],
+      sew15: [JavaFx, chapter15_javafx_basic.html, 15],
+      sew16: [JUC, chapter16_juc.html, 16]
+    }
+
+  java_ee:
+    category: Computer Science
+    title: Learn Java EE
+    type: BOOK
+    fromFolder: learn_javaee
+    chapterFiles: {
+      eec1: [serlvet_jsp_basic, chapter1_servelt_basic.html, 1],
+      eec2: [action_el, chapter2_action_el.html, 2],
+      eec3: [jstl_taglib, chapter3_jstl_taglib.html, 3],
+      eec4: [deploy_secret_filter_wrapper, chapter4_deploy_security_filter_wrapper.html, 4],
+      eec5: [spring_ioc, chapter5_spring_ioc.html, 5],
+      eec6: [spring_aop, chapter6_spring_aop.html, 6],
+      eec7: [jdbc, chapter7_jdbc.html, 7],
+      eec8: [jdbc_transaction, chapter8_spring_jdbc_transaction.html, 8],
+      eec9: [hibernate_without_jpa, chapter9_hibernate_basic.html, 9],
+      eec10: [spring_mvc, chapter10_spring_mvc.html, 10],
+      eec11: [SSH, chapter11_ssh.html, 11],
+      eec12: [maven, chapter12_maven.html, 12],
+      eec13: [ssh_in_action, chapter13_ssh_in_action.html, 13],
+      eec14: [shiro, chapter14_shiro.html, 14],
+      eec15: [boot, chapter15_spring_boot.html, 15],
+      eec16: [boot2, chapter16_spring_boot_2.html, 16],
+      eec17: [quartz, chapter17_quartz.html, 17]
+    }
+
+  learn_scala:
+    category: Computer Science
+    title: Learn Scala
+    type: BOOK
+    fromFolder: learn_scala
+    chapterFiles: {
+      sc1: [scala_basic, chapter1_scala_basic.html, 1],
+      sc2: [scala_class, chapter2_scala_class.html, 2],
+      sc3: [scala_function, chapter3_scala_function.html, 3],
+      sc4: [scala_container, chapter4_scala_container.html, 4],
+      sc5: [scala_generic, chapter5_scala_generic.html, 5],
+      sc6: [scala_io, chapter6_scala_io.html, 6]
+    }
+
+  learn_swift:
+    category: Computer Science
+    title: Learn Swift
+    type: BOOK
+    fromFolder: learn_swift
+    chapterFiles: {
+      sw1: [swift_basic, chapter1_swift_basic.html, 1],
+    }
+
+  database:
+    category: Computer Science
+    title: Using Database
+    fromFolder: learn_database
+    chapterFiles: {
+      dbmysql: [mysql学习指南, book1_mysql_learn_guide.html,1]
+    }
+
+  javascript:
+    category: Computer Science
+    title: Learn JavaScript
+    type: BOOK
+    fromFolder: learn_javascript
+    chapterFiles: {
+      wc1: [html_basic, chapter1_html_basic.html, 1],
+      wc2: [css_basic, chapter2_css_basic.html, 2],
+      wc3: [css3, chapter3_css3.html, 3],
+      wc3example: [css3_example, chapter4_css_example.html, 4],
+      wc3flex: [css3_flex, chapter5_css_flex.html, 5],
+      wc4bs: [bootstrap, chapter6_bs.html, 6],
+      jsc1: [javascript_basic, chapter7_jsbasic.html, 7],
+      jsc2: [javascript_container, chapter8_js_collector.html,8],
+      jsc3: [javascript_dom, chapter9_dom.html,9],
+      jsc4: [javascript_pro, chapter10_js_pro.html, 10],
+      jsc5: [javascript_ajax, chapter11_ajax.html, 11],
+      jsvue: [vue_basic, chapter12_vue.html, 12],
+      jsvue2: [vue_pro, chapter13_vue2.html, 13],
+      jsvueaction: [vue_action, chapter13_vue_in_action.html, 14]
+    }
+
+  python:
+    category: Computer Science
+    title: Using Python
+    fromFolder: learn_python
+    chapterFiles: {
+      pyc1: [play_with_django, learn_django_1.html, 1],
+      pyc2: [django_deployed, django_deployed.html, 2],
+    }
+
+  visual_precption:
+    category: Neuro Science
+    title: Visual Percipience
+    fromFolder: coursera_learn_perception
+    chapterFiles: {
+      vpw1: [角度、长度、大小、距离、深度感知, Week3_see_space.html, 1],
+      vpw2: [运动、方向、速度感知, Week_4_Seeing_Motion.html, 2],
+      vpw3: [一个整合视觉错觉的统一理论, Week_5_SumUp.html, 3],
+    }
+
+  neuro_science:
+    category: Neuro Science
+    title: Medical Neuroscience
+    fromFolder: learn_neuroscience
+    chapterFiles: {
+      nsw1: [导论, chapter1_nsintro.html, 1],
+      nsw2: [静息态神经元膜和动作电位, chapter2_how_neuro_works_1.html, 2],
+    }
+
+  machine_learning:
+    category: Machine Learning
+    title: Andrew Ng ML
+    type: COURSE
+    fromFolder: learn_machine_learning
+    chapterFiles: {
+      mlw1: ["K-Means & PCA" ,chapter7_clustering.html, 1],
+      mlw2: ["异常检测 & 推荐系统" ,chapter8.html, 2],
+    }

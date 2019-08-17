@@ -1,0 +1,7 @@
+16-Sep-2018 20:21:13.458 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: contextInitialized()
+16-Sep-2018 20:21:13.458 INFO [main] org.apache.catalina.core.ApplicationContext.log SessionListener: contextInitialized()
+16-Sep-2018 20:21:13.458 INFO [main] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('StockTicker', 'async.Stockticker@2df3b89c')
+16-Sep-2018 20:55:47.794 INFO [http-nio-8080-exec-1] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('org.apache.jasper.runtime.JspApplicationContextImpl', 'org.apache.jasper.runtime.JspApplicationContextImpl@3b778fa')
+16-Sep-2018 20:55:47.938 INFO [http-nio-8080-exec-1] org.apache.catalina.core.ApplicationContext.log ContextListener: attributeAdded('org.apache.jasper.compiler.ELInterpreter', 'org.apache.jasper.compiler.ELInterpreterFactory$DefaultELInterpreter@35decf26')
+16-Sep-2018 20:55:49.912 INFO [http-nio-8080-exec-1] org.apache.catalina.core.ApplicationContext.log SessionListener: sessionCreated('6E5E90857FAF9E9A35CF75677D6C0041')
+16-Sep-2018 21:26:19.260 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.ApplicationContext.log SessionListener: sessionDestroyed('6E5E90857FAF9E9A35CF75677D6C0041')

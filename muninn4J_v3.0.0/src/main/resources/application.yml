@@ -1,0 +1,53 @@
+spring:
+  profiles:
+    active: test
+  mvc:
+    static-path-pattern: /static/** #前端静态文件
+    throw-exception-if-no-handler-found: true #方便映射处理 404 等错误
+server:
+  servlet:
+    session:
+      cookie:
+        name: CM_ID
+logging:
+  group:
+    cm: com.mazhangjing.muninn
+---
+spring:
+  profiles: test
+  thymeleaf:
+    cache: false #关闭测试期间的 Thymleaf 缓存
+  jpa:
+    database: mysql
+  datasource: #测试数据库信息
+    username: corkine
+    password: mi960032
+    url: jdbc:mysql:///spring
+    driver-class-name: com.mysql.cj.jdbc.Driver
+logging:
+  path: temp
+  level:
+    root: WARN
+    cm: DEBUG
+    web: DEBUG
+    sql: DEBUG
+server:
+  port: 8080
+  error: #测试期间，允许 error 页面获取 exception 和 stacktrace 异常
+    include-exception: true
+    include-stacktrace: always
+---
+spring:
+  profiles: real
+  thymeleaf:
+    cache: true
+
+logging:
+  path: LogFile
+  level:
+    root: WARN
+    cm: INFO
+    web: INFO
+    sql: INFO
+server:
+  port: 80

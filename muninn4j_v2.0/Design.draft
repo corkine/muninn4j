@@ -1,0 +1,121 @@
+# MVC
+
+- index.jsp
+	- header:
+		category-name, book-name, book-address
+- book.jsp
+	- header
+	- chapter-name, chapter-address
+- chapter.jsp
+	- header
+	- chapter-name, chapter-address
+	- chapter-intro
+
+	
+mun.mazhangjing.com/
+	/ --> HomeHandler --> index.jsp
+	/book/{book_id} --> BookHandler --> book.jsp
+	/book/{book_id}/chapter/{chapter_id} --> ChapterHandler --> chapter.jsp
+
+# Entry
+
+Interface Volume
+	- String id
+	- String title
+	- String intro 
+	- String link
+	- LinkedHashMap<Chapter> chapters
+	
+	双向多对一：多
+
+class Course
+
+	基于subclass 的类继承
+
+class Book
+
+	基于 subclass 的类继承
+
+Interface Chapter
+	- String id
+	- String title
+	- String version
+	- Integer noteCount
+	- Integer editCount
+	- String intro
+	- String lastEdit
+	- ArrayList<Question> questions
+	
+	双向多对一：一
+	单向多对一：多
+	
+Interface Postscript
+	- String id
+	- LocalDateTime time
+	- String title
+	- String body
+	
+	单向多对一：一
+
+class Question
+
+	基于 subclass 的类继承
+
+class Note
+
+	基于 subclass 的类继承
+
+class Link
+
+	基于 subclass 的类继承
+
+class Quote
+
+	基于 subclass 的类继承
+
+
+# Service
+
+class VolumeService
+	static ClassPathXmlApplicationContext
+	static ctx.getBean DAO
+	
+	getVolumes()
+	getVolume(book_id)
+	getChapter(chapter_id)
+	
+class BroadService
+	static String[]
+	
+	Modal[] getModals(List<Volumes> volumes)
+	String getSummary(List<Volumes> volumes)
+	Blog[] getNews(int count)
+	String getTodaysQuote()
+	
+class Blog
+	String title
+	String author
+	LocalDateTime time
+	String intro
+	String url
+	
+class Modal
+	String id
+	String description
+	bool canGet()
+	
+	
+
+<class name="PostScript" table="POSTSCRIPTS">
+        <id name="id" column="POS_ID" type="string"/>
+        <discriminator column="POSTSCRIPT" />
+
+        <property name="title" type="string" column="TITLE" />
+        <property name="body" type="string" column="BODY" />
+        <property name="time" type="date" column="TIME" />
+
+        <subclass name="Link" discriminator-value="LINK"/>
+        <subclass name="Note" discriminator-value="NOTE" />
+        <subclass name="Question" discriminator-value="QUESTION" />
+        <subclass name="Quote" discriminator-value="QUOTE" />
+    </class>

@@ -1,0 +1,13 @@
+com\mazhangjing\muninn\v1\Entry\Link.class
+com\mazhangjing\muninn\v1\Entry\Quote.class
+com\mazhangjing\muninn\v1\Entry\PostScript.class
+com\mazhangjing\muninn\v1\Service\VolumeService.class
+com\mazhangjing\muninn\v1\Entry\Chapter.class
+com\mazhangjing\muninn\v1\DAO\VolumeDAO.class
+com\mazhangjing\muninn\v1\Entry\Question.class
+com\mazhangjing\muninn\v1\Entry\Volume.class
+com\mazhangjing\muninn\v1\DAO\HibernateUtils.class
+com\mazhangjing\muninn\v1\Entry\Book.class
+com\mazhangjing\muninn\v1\Entry\Course.class
+com\mazhangjing\muninn\v1\Entry\Note.class
+com\mazhangjing\muninn\v1\Handler\VolumeHandler.class

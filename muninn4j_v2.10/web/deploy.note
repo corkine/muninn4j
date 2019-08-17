@@ -1,0 +1,23 @@
+开发中执行此命令以进行数据库更新
+
+java -Djava.ext.dirs=C:/Users/Corkine/muninn4j_v2/out/artifacts/muninn4j_v2_war_exploded/WEB-INF/lib com.mazhangjing.muninn.v2.check.DoUpdate
+
+部署到 docker 中需要连接本地目录，设置端口映射、防火墙
+
+docker run --name mcat -p 8808:8080 -v /muninn-v2:/muninn-v2 -d tomcat
+
+使用 docker logs -f mcat 查看日志
+
+使用 docker ps -a 查看状态
+
+进入 tomcat 修改 gui 管理界面以及定义 jsp 解析级别、处理根映射文件关联
+
+docker exec -it xxxx /bin/bash
+
+/usr/local/tomcat 是 tomcat 路径
+
+修改 <Host> 中间部分，添加子标签 <Context docBase="/muninn-v2/muninn" path="" debug="0" reloadable="true" />来定义文件和网站 URL 映射
+
+修改 tomcat-users.xml 以添加用户，在  webapps/xxx/META-INF/context.xml 中添加允许远程主机访问即可
+
+cd /muninn-v2/muninn/WEB-INF/classes; java -Djava.ext.dirs=/muninn-v2/muninn/WEB-INF/lib com.mazhangjing.muninn.v2.check.DoUpdate; cd -

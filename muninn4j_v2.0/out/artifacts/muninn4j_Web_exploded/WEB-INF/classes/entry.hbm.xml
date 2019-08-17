@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.mazhangjing.muninn.v1.Entry">
+
+    <class name="Volume" table="VOLUMES" discriminator-value="VOLUME">
+        <id name="id" type="string" column="ID" />
+        <discriminator column="TYPE"/>
+
+        <property name="title" column="TITLE" type="string" />
+        <property name="intro" column="INTRO" type="string" />
+        <property name="link" column="LINK" type="string" />
+        <set name="chapters" table="CHAPTERS" inverse="true" cascade="delete" lazy="false">
+            <key column="VOL_ID"></key>
+            <one-to-many class="Chapter" />
+        </set>
+
+        <subclass name="Book" discriminator-value="BOOK">
+        </subclass>
+        <subclass name="Course" discriminator-value="COURSE">
+        </subclass>
+    </class>
+
+    <class name="Chapter" table="CHAPTERS">
+        <id name="id" type="string" column="CH_ID" />
+
+        <property name="title" type="string" column="TITLE" />
+        <property name="intro" type="string" column="INTRO" />
+        <property name="editCount" type="integer" column="EDIT_COUNT" />
+        <property name="noteCount" type="integer" column="NOTE_COUNT" />
+        <property name="lastEdit" type="date" column="LAST_EDIT" />
+        <property name="version" type="string"
+                  formula="(select concat(NOTE_COUNT, '.', EDIT_COUNT) from CHAPTERS c where c.CH_ID = CH_ID)" />
+        <set name="postscripts" table="POSTSCRIPTS" inverse="true" cascade="delete" lazy="false">
+            <key column="CH_ID"></key>
+            <one-to-many class="PostScript" />
+        </set>
+        <many-to-one name="volume" class="Volume" column="VOL_ID" />
+    </class>
+
+    <class name="PostScript" table="POSTSCRIPTS">
+        <id name="id" column="POS_ID" type="string"/>
+        <discriminator column="POSTSCRIPT" />
+
+        <property name="title" type="string" column="TITLE" />
+        <property name="body" type="string" column="BODY" />
+        <property name="time" type="date" column="TIME" />
+
+        <subclass name="Link" discriminator-value="LINK"/>
+        <subclass name="Note" discriminator-value="NOTE" />
+        <subclass name="Question" discriminator-value="QUESTION" />
+        <subclass name="Quote" discriminator-value="QUOTE" />
+    </class>
+
+</hibernate-mapping>

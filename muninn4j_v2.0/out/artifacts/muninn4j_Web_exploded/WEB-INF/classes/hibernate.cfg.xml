@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--基本的数据库信息-->
+        <property name="connection.username">corkine</property>
+        <property name="connection.password">mi960032</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/muninn?useSSL=false</property>
+        <!--更改 MySQL 默认隔离级别-->
+        <property name="connection.isolation">2</property>
+        <!--更方便的 DEBUG -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <!--&lt;!&ndash;配置 datasource 数据源&ndash;&gt;
+        <property name="c3p0.max_size">1</property>
+        <property name="c3p0.min_size">1</property>
+        <property name="c3p0.acquire_increment">1</property>
+        <property name="c3p0.max_statements">100</property>
+        &lt;!&ndash;一个链接多长时间没有用，超时设置为 timeout、idel_test 为多长时间检测一次&ndash;&gt;
+        <property name="c3p0.timeout">1000</property>
+        <property name="c3p0.idle_test_period">1000</property>-->
+
+        <!--配置管理 Session 的方式: 基于 thread-->
+        <property name="current_session_context_class">thread</property>
+
+        <!--配置类的映射文件-->
+        <mapping resource="entry.hbm.xml" />
+
+    </session-factory>
+</hibernate-configuration>

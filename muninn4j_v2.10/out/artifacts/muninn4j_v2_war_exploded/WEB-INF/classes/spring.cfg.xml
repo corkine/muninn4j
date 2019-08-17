@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+    <!--在此处导入 DataSource 而不是 Hibernate 中, 使用 Java Class 而不是 C3P0.xml 配置-->
+    <context:property-placeholder location="classpath:database.properties" />
+    <bean class="com.mchange.v2.c3p0.ComboPooledDataSource" id="dataSource"
+          p:user="${jdbc.user}" p:password="${jdbc.password}" p:driverClass="${jdbc.driverClass}"
+          p:initialPoolSize="${jdbc.initPoolSize}" p:maxPoolSize="${jdbc.maxPoolSize}"
+          p:jdbcUrl="${jdbc.jdbcUrl}"
+          p:idleConnectionTestPeriod="60"
+          p:testConnectionOnCheckin="true"
+          p:maxIdleTime="10800"
+          p:maxIdleTimeExcessConnections="300"
+    />
+    <!--p:testConnectionOnCheckout="true" 性能损耗很大-->
+    <!--在此处配置 Hibernate 的 SessionFactory， 同时提供其配置文件和映射文件-->
+    <bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" id="sessionFactory"
+          p:dataSource-ref="dataSource"
+          p:configLocation="classpath:hibernate.cfg.xml"
+          p:mappingLocations="classpath:hbm/*.hbm.xml">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="connection.isolation">2</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.c3p0.timeout">90</prop>
+                <prop key="hibernate.c3p0.validate">true</prop>
+            </props>
+        </property>
+    </bean>
+    <!--配置 Spring 声明式事务：事务管理器、事务属性、事务切点-->
+    <bean class="org.springframework.orm.hibernate5.HibernateTransactionManager" id="transactionManager"
+          p:sessionFactory-ref="sessionFactory"/>
+    <tx:advice id="txAdvice">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="purchase" propagation="REQUIRES_NEW"/>
+            <tx:method name="*" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* com.mazhangjing.muninn.v2.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+    </aop:config>
+    <!--启用业务 AOP 扫描，自动代理，对于 MVC 也要启用-->
+    <aop:aspectj-autoproxy />
+
+    <context:component-scan base-package="com.mazhangjing.muninn.v2.*">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+    </context:component-scan>
+</beans>

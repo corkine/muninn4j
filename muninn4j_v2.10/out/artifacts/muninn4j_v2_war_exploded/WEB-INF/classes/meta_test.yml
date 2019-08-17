@@ -1,0 +1,82 @@
+transConfig:
+  fromPath: C:/Users/Corkine/Downloads/Web_nb.mazhangjing.com_20181029_235901/.jupyter
+  toPath: C:/Users/Corkine/muninn4j_v2/web/source
+  transCommand: jupyter nbconvert
+  lazyFetchVolume: true
+  deletePostScriptBeforeUpdate: false
+#在服务器端需要修改此处设置
+#command to execute:
+# java -Djava.ext.dirs=C:xxx/lib com.mazhangjing.muninn.v2.check.DoUpdate
+# fromPath: /root/.jupyter
+# toPath: /muninn-v2/muninn/source
+
+#必须要有 fromFolder， fromPath
+#chapterFiles 可以没有，如果有，则必须提供包含至少两个参数的列表，第二个参数为html的地址
+#实际将合并此三者得到章节所需 ipynb 的地址，并且进行查找、迁移和转换
+#如果更改了 ID 则一定要更改文章，以保持文本更新，否则将会删除此文章，除非关闭了 lazyFetchVolume
+
+
+volumeInfo:
+  probability:
+    category: Data Science
+    type: COURSE
+    title: Probability
+    intro: 课程简介为空。
+    link: http://coursea.com/tw
+    fromFolder: book_learn_stats
+    chapterFiles: {
+      pbw2: [概率导论, Week1_2_Probability.html,1 ],
+      pbw3: [独立概率和古典概率, Week_3.html, 2],
+      pbw4: [离散分布模型, Week4_PMF_CDF.html, 3],
+      pbw5: [连续分布模型, week5.html, 4],
+      pbw6: [连续分布期望值, week6.html, 5],
+    }
+
+  pandas:
+    category: Data Science
+    type: COURSE
+    title: Pandas & Numpy
+    fromFolder: book_learn_stats
+    chapterFiles: {}
+
+  matlab:
+    category: Data Science
+    title: MATLAB & PTB
+    fromFolder: book_learn_stats
+    chapterFiles: {}
+
+  model_thinking:
+    category: Model Thinking
+    title: Model Thinking
+    fromFolder: coursera_learn_models
+    chapterFiles: {
+      mtw1: ["[O] Aggragation(S) & Decision(P)", WEEK2_model_thinking.html, 1],
+      mtw2: ["[I] How People Think & Modeling Data", Week3_Model_Thinking.html, 2],
+      mtw3: ["[F] Tipping Point & Growth Model", week4_tipping_point.html, 3],
+      mtw4: ["[F] Perspectives & Marklv Processing", week5_problem_soving.html, 4],
+      mtw5: [Lyapunov Functions, week7_lyapunov_functions.html, 5],
+      mtw6: [path dependent, week8_path_dependent.html, 6],
+      mtw7: [random, week9_random_walk.html, 7],
+      mtw8: [dilemma, week10_prisoner_dilemma.html, 8],
+      mtw9: [replicator, week11_replicator_dynamics.html, 9],
+    }
+
+  java_ee:
+    category: Computer Science
+    title: Learn Java EE
+    type: BOOK
+    fromFolder: learn_javaee
+    chapterFiles: {
+      eec1: [serlvet_jsp_basic, chapter1_servelt_basic.html, 1],
+      eec2: [action_el, chapter2_action_el.html, 2],
+      eec3: [jstl_taglib, chapter3_jstl_taglib.html, 3],
+      eec4: [deploy_secret_filter_wrapper, chapter4_deploy_security_filter_wrapper.html, 4],
+      eec5: [spring_ioc, chapter5_spring_ioc.html, 5],
+      eec6: [spring_aop, chapter6_spring_aop.html, 6],
+      eec7: [jdbc, chapter7_jdbc.html, 7],
+      eec8: [jdbc_transaction, chapter8_spring_jdbc_transaction.html, 8],
+      eec9: [hibernate_without_jpa, chapter9_hibernate_basic.html, 9],
+      eec10: [spring_mvc, chapter10_spring_mvc.html, 10],
+      eec11: [SSH, chapter11_ssh.html, 11],
+      eec12: [maven, chapter12_maven.html, 12]
+    }

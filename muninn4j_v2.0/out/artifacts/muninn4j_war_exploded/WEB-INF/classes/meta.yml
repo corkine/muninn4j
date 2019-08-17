@@ -1,0 +1,18 @@
+transConfig:
+  fromPath: C:/Tomcat/logs
+  toPath: tmp
+  transCommand: jupyter nbconvert
+
+volumeOrder: ["mt","pr1","pandas","plot","sklearn","matlab","introc","cst","langc",
+              "javase","javaee","design_pattern","database","js","python","visual1","neuro","ml1"]
+
+volumeInfo:
+  mt:
+    category: Data Science
+    type: BOOK
+    title: Model Thinking
+    intro:
+    link: http://book.douban.com
+    fromFolder: hello
+    chapterFiles: {cm: chapter1_play_java.html, dd: abcdefg.html, ee: hello2.html}
+
